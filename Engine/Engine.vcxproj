@@ -126,9 +126,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\filesystem\FileSystem.cpp" />
+    <ClCompile Include="src\log\Log.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\filesystem\FileSystem.h" />
+    <ClInclude Include="src\log\Log.h" />
     <ClInclude Include="src\shaders.h" />
   </ItemGroup>
   <ItemGroup>

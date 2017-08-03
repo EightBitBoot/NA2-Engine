@@ -2,4 +2,3 @@ bin/**
 .vs/**
 intermediate/**
 *.user
-*.licenseheader
