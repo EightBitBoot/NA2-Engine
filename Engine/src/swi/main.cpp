@@ -5,6 +5,9 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 
+#include "graphics\vertexarray.h"
+#include "graphics\vertex.h"
+
 #include "math\mat4.h"
 #include "shader.h"
 
@@ -38,38 +41,53 @@ int main()
 
 	glfwSetWindowSizeCallback(window, &glfwWindowResizeCallback);
 
-	float vertices[] = {
-		-0.5f,  0.5f,
-		-0.5f, -0.5f,
-		 0.5f,  0.5f,
-		 0.5f,  0.5f,
-		 0.5f, -0.5f,
-		-0.5f, -0.5f
+	//float vertices[] = {
+	//	-0.5f,  0.5f,
+	//	-0.5f, -0.5f,
+	//	 0.5f,  0.5f,
+	//	 0.5f,  0.5f,
+	//	 0.5f, -0.5f,
+	//	-0.5f, -0.5f
+	//};
+
+	vertex vertices[] = {
+		{ -0.5f,  0.5f },
+		{ -0.5f, -0.5f },
+		{  0.5f,  0.5f },
+		{  0.5f,  0.5f },
+		{  0.5f, -0.5f },
+		{ -0.5f, -0.5f }
 	};
 
-	GLuint vertexArrayID = -1;
-	glGenVertexArrays(1, &vertexArrayID);
+	//GLuint vertexArrayID = -1;
+	//glGenVertexArrays(1, &vertexArrayID);
 
-	if (vertexArrayID == -1) {
-		terminal_error("Failed to create vao!");
-	}
+	//if (vertexArrayID == -1) {
+	//	terminal_error("Failed to create vao!");
+	//}
 
-	glBindVertexArray(vertexArrayID);
-	
-	GLuint arrayBufferID = -1;
-	glGenBuffers(1, &arrayBufferID);
+	//glBindVertexArray(vertexArrayID);
+	//
+	//GLuint arrayBufferID = -1;
+	//glGenBuffers(1, &arrayBufferID);
 
-	if (arrayBufferID == -1) {
-		terminal_error("Failed to create vao!");
-	}
+	//if (arrayBufferID == -1) {
+	//	terminal_error("Failed to create vao!");
+	//}
 
-	glBindBuffer(GL_ARRAY_BUFFER, arrayBufferID);
+	//glBindBuffer(GL_ARRAY_BUFFER, arrayBufferID);
 
-	glBufferData(GL_ARRAY_BUFFER, 6 * (2 * sizeof(float)), vertices, GL_STATIC_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, 6 * (2 * sizeof(float)), vertices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	//glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	glEnableVertexAttribArray(0);
+	//glEnableVertexAttribArray(0);
+
+	VertexArray vertexArray;
+	vertexArray.addVertices(vertices, 6);
+	vertexArray.bufferVertices();
+
+	vertexArray.pushFormat(GL_FLOAT, 2);
 
 	GLint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
@@ -151,10 +169,12 @@ int main()
 		matrix[2][0] = negAngleSin;
 		matrix[2][2] = negAngleCos;
 		
+		vertexArray.bind();
 		glUseProgram(shaderProgramID);
 		glUniformMatrix4fv(rotationMatLocation, 1, GL_FALSE, &matrix[0][0]);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glUseProgram(0);
+		vertexArray.unbind();
 
 		glfwSwapBuffers(window);
 
