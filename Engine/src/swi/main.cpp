@@ -6,8 +6,6 @@
 #include <GLFW\glfw3.h>
 
 #include "math\mat4.h"
-#include "graphics\vertex.h"
-#include "graphics\vertexarray.h"
 #include "shader.h"
 
 void terminal_error(const char* message);

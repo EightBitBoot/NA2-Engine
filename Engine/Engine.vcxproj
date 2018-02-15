@@ -133,16 +133,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\swi\graphics\vertexarray.cpp" />
-    <ClCompile Include="src\swi\graphics\vertexbuffer.cpp" />
     <ClCompile Include="src\swi\main.cpp" />
     <ClCompile Include="src\swi\math\mat4.cpp" />
     <ClCompile Include="src\swi\math\vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\swi\graphics\vertexarray.h" />
-    <ClInclude Include="src\swi\graphics\vertexbuffer.h" />
-    <ClInclude Include="src\swi\graphics\vertex.h" />
     <ClInclude Include="src\swi\math\mat4.h" />
     <ClInclude Include="src\swi\math\vec4.h" />
     <ClInclude Include="src\swi\shader.h" />
