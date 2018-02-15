@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{1B8C0653-3062-4B3B-8825-6DC43B23A0F5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLEW", "dependencies\GLEW\GLEW.vcxproj", "{0BFCDBA3-1630-4638-BB08-47CFED0FA063}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dependencies", "dependencies", "{0A79CA48-5EEA-4851-830C-3880B24DA0AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +25,22 @@ Global
 		{1B8C0653-3062-4B3B-8825-6DC43B23A0F5}.Release|x64.Build.0 = Release|x64
 		{1B8C0653-3062-4B3B-8825-6DC43B23A0F5}.Release|x86.ActiveCfg = Release|Win32
 		{1B8C0653-3062-4B3B-8825-6DC43B23A0F5}.Release|x86.Build.0 = Release|Win32
+		{0BFCDBA3-1630-4638-BB08-47CFED0FA063}.Debug|x64.ActiveCfg = Debug|x64
+		{0BFCDBA3-1630-4638-BB08-47CFED0FA063}.Debug|x64.Build.0 = Debug|x64
+		{0BFCDBA3-1630-4638-BB08-47CFED0FA063}.Debug|x86.ActiveCfg = Debug|Win32
+		{0BFCDBA3-1630-4638-BB08-47CFED0FA063}.Debug|x86.Build.0 = Debug|Win32
+		{0BFCDBA3-1630-4638-BB08-47CFED0FA063}.Release|x64.ActiveCfg = Release|x64
+		{0BFCDBA3-1630-4638-BB08-47CFED0FA063}.Release|x64.Build.0 = Release|x64
+		{0BFCDBA3-1630-4638-BB08-47CFED0FA063}.Release|x86.ActiveCfg = Release|Win32
+		{0BFCDBA3-1630-4638-BB08-47CFED0FA063}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0BFCDBA3-1630-4638-BB08-47CFED0FA063} = {0A79CA48-5EEA-4851-830C-3880B24DA0AC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4929FDD5-3FB4-4D70-8288-DE407306C956}
 	EndGlobalSection
 EndGlobal

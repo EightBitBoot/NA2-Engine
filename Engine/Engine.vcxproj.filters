@@ -27,33 +27,40 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="src\swi\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\log\Log.cpp">
-      <Filter>Source Files\Log</Filter>
+    <ClCompile Include="src\swi\math\mat4.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\filesystem\FileSystem.cpp">
-      <Filter>Source Files\FileSystem</Filter>
+    <ClCompile Include="src\swi\math\vec4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\swi\graphics\vertexbuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\swi\graphics\vertexarray.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\fragment.shad">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="src\shaders\vertex.shad">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\shaders.h">
+    <ClInclude Include="src\swi\shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\log\Log.h">
-      <Filter>Header Files\Log</Filter>
+    <ClInclude Include="src\swi\math\mat4.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\filesystem\FileSystem.h">
-      <Filter>Header Files\FileSystem</Filter>
+    <ClInclude Include="src\swi\math\vec4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\swi\graphics\vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\swi\graphics\vertexarray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\swi\graphics\vertexbuffer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

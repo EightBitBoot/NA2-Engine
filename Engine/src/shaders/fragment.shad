@@ -1,9 +1,0 @@
-R"( //Allows importing into header file
-#version 150
-
-out vec4 outcolor;
-
-void main() {
-	outcolor = vec4(1.0, 1.0, 1.0, 1.0);
-};
-)";
