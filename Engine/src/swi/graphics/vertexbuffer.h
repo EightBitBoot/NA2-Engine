@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GL\glew.h>
+#include "glcommon.h"
 
 class VertexBuffer {
 public:

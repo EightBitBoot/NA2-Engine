@@ -2,11 +2,9 @@
 
 #include <math.h>
 
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
-
 #include "graphics\vertexarray.h"
-#include "graphics\vertex.h"
+
+#include "graphics\glcommon.h"
 
 #include "math\mat4.h"
 #include "shader.h"
@@ -17,7 +15,7 @@ void glfwWindowResizeCallback(GLFWwindow* window, int width, int height);
 int main()
 {
 	if (glfwInit() == GLFW_FALSE) {
-		terminal_error("Failed to initalize GLFW!");
+		terminal_error("Failed to initialize GLFW!");
 	}
 
 	GLFWwindow* window = glfwCreateWindow(600, 400, "Switch", NULL, NULL);
@@ -28,7 +26,7 @@ int main()
 	glfwMakeContextCurrent(window);
 
 	if (glewInit() != GLEW_OK) {
-		terminal_error("Failed to initalize GLEW!");
+		terminal_error("Failed to initialize GLEW!");
 	}
 
 	printf("OPENGL version: %s\n", glGetString(GL_VERSION));
@@ -89,48 +87,48 @@ int main()
 
 	vertexArray.pushFormat(GL_FLOAT, 2);
 
-	GLint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-	GLint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+	GLCALL(GLint vertexShaderID = glCreateShader(GL_VERTEX_SHADER));
+	GLCALL(GLint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER));
 
-	glShaderSource(vertexShaderID, 1, &vertexShader, NULL);
-	glShaderSource(fragmentShaderID, 1, &fragmentShader, NULL);
+	GLCALL(glShaderSource(vertexShaderID, 1, &vertexShader, NULL));
+	GLCALL(glShaderSource(fragmentShaderID, 1, &fragmentShader, NULL));
 
 	GLint success = 0;
-	glCompileShader(vertexShaderID);
-	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success);
+	GLCALL(glCompileShader(vertexShaderID));
+	GLCALL(glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success));
 	if (success == GL_FALSE) {
 		GLint logLength = 0;
-		glGetShaderiv(vertexShaderID, GL_INFO_LOG_LENGTH, &logLength);
+		GLCALL(glGetShaderiv(vertexShaderID, GL_INFO_LOG_LENGTH, &logLength));
 		char errorMessage[1024];
-		glGetShaderInfoLog(vertexShaderID, 1024, &logLength, errorMessage);
+		GLCALL(glGetShaderInfoLog(vertexShaderID, 1024, &logLength, errorMessage));
 		printf("Vertex: "); terminal_error(errorMessage);
 	}
 
 	success = 0;
-	glCompileShader(fragmentShaderID);
-	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &success);
+	GLCALL(glCompileShader(fragmentShaderID));
+	GLCALL(glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &success));
 	if (success == GL_FALSE) {
 		GLint logLength = 0;
-		glGetShaderiv(fragmentShaderID, GL_INFO_LOG_LENGTH, &logLength);
+		GLCALL(glGetShaderiv(fragmentShaderID, GL_INFO_LOG_LENGTH, &logLength));
 		char errorMessage[1024];
-		glGetShaderInfoLog(fragmentShaderID, 1024, &logLength, errorMessage);
+		GLCALL(glGetShaderInfoLog(fragmentShaderID, 1024, &logLength, errorMessage));
 		printf("Fragment: ");  terminal_error(errorMessage);
 	}
 
 	GLuint shaderProgramID = glCreateProgram();
 	
-	glAttachShader(shaderProgramID, vertexShaderID);
-	glAttachShader(shaderProgramID, fragmentShaderID);
+	GLCALL(glAttachShader(shaderProgramID, vertexShaderID));
+	GLCALL(glAttachShader(shaderProgramID, fragmentShaderID));
 
-	glLinkProgram(shaderProgramID);
+	GLCALL(glLinkProgram(shaderProgramID));
 	
-	glDetachShader(shaderProgramID, vertexShaderID);
-	glDetachShader(shaderProgramID, fragmentShaderID);
+	GLCALL(glDetachShader(shaderProgramID, vertexShaderID));
+	GLCALL(glDetachShader(shaderProgramID, fragmentShaderID));
 
-	glDeleteShader(vertexShaderID);
-	glDeleteShader(fragmentShaderID);
+	GLCALL(glDeleteShader(vertexShaderID));
+	GLCALL(glDeleteShader(fragmentShaderID));
 
-	GLint rotationMatLocation = glGetUniformLocation(shaderProgramID, "rotMat");
+	GLCALL(GLint rotationMatLocation = glGetUniformLocation(shaderProgramID, "rotMat"));
 
 	if (rotationMatLocation == -1) {
 		terminal_error("Couldn't find uniform");
@@ -147,7 +145,7 @@ int main()
 	float angle = 0.0f;
 
 	while (!stopped) {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		GLCALL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
 		glfwPollEvents();
 
@@ -170,10 +168,10 @@ int main()
 		matrix[2][2] = negAngleCos;
 		
 		vertexArray.bind();
-		glUseProgram(shaderProgramID);
-		glUniformMatrix4fv(rotationMatLocation, 1, GL_FALSE, &matrix[0][0]);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glUseProgram(0);
+		GLCALL(glUseProgram(shaderProgramID));
+		GLCALL(glUniformMatrix4fv(rotationMatLocation, 1, GL_FALSE, &matrix[0][0]));
+		GLCALL(glDrawArrays(GL_TRIANGLES, 0, 6));
+		GLCALL(glUseProgram(0));
 		vertexArray.unbind();
 
 		glfwSwapBuffers(window);
@@ -184,7 +182,7 @@ int main()
 		}
 	}
 
-	glDeleteProgram(shaderProgramID);
+	GLCALL(glDeleteProgram(shaderProgramID));
 
 	glfwDestroyWindow(window);
 	glfwTerminate();

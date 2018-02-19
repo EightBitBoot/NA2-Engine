@@ -2,10 +2,9 @@
 
 #include<vector>
 
-#include <GL\glew.h>
+#include "glcommon.h"
 
 #include "vertexbuffer.h"
-#include "vertex.h"
 
 class VertexArray {
 public:

@@ -42,6 +42,9 @@
     <ClCompile Include="src\swi\graphics\vertexbuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\swi\graphics\glerror.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\swi\shader.h">
@@ -53,13 +56,13 @@
     <ClInclude Include="src\swi\math\vec4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\swi\graphics\vertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\swi\graphics\vertexarray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\swi\graphics\vertexbuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\swi\graphics\glcommon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
