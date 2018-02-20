@@ -4,6 +4,7 @@
 
 #include "vec4.h"
 
+//4 * 4 float matrix
 class mat4 {
 public:
 	union {

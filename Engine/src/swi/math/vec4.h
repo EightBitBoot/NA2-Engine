@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+//4 float vector
 class vec4 {
 public:
 	float elements[4];

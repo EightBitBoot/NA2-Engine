@@ -45,6 +45,9 @@
     <ClCompile Include="src\swi\graphics\glerror.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\swi\graphics\glmanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\swi\shader.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\swi\graphics\glcommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\swi\graphics\glmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

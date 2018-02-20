@@ -1,6 +1,6 @@
 #include "vertexarray.h"
 
-VertexArray::VertexArray() : m_openglName(0), m_bound(false), m_nextFormatPointer(0), m_nextFormatStride(0), m_nextFormatIndex(0)
+VertexArray::VertexArray(GLManager* manager) : m_openglName(0), m_buffer(manager), m_manager(manager), m_bound(false), m_nextFormatIndex(0), m_nextFormatStride(0), m_nextFormatPointer(0)
 {
 	GLCALL(glGenVertexArrays(1, &m_openglName));
 }
@@ -11,13 +11,29 @@ VertexArray::~VertexArray()
 
 void VertexArray::bind()
 {
-	GLCALL(glBindVertexArray(m_openglName));
+	m_manager->bindVertexArray(m_openglName);
 	m_bound = true;
 }
 
 void VertexArray::unbind()
 {
-	GLCALL(glBindVertexArray(0));
+	m_manager->unbindVertexArray();
+	m_bound = false;
+}
+
+void VertexArray::bindBuffer()
+{
+	m_buffer.bind();
+}
+
+void VertexArray::unbindBuffer()
+{
+	m_buffer.unbind();
+}
+
+void VertexArray::bindPrevious()
+{
+	m_manager->bindPreviousVertexArray();
 	m_bound = false;
 }
 
@@ -37,16 +53,10 @@ void VertexArray::bufferVertices()
 {
 	if (m_vertices.size() > 0) {
 		if (!m_bound) {
-			GLint previous;
-			GLCALL(glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &previous));
-
 			bind();
 			m_buffer.buffer(&m_vertices[0], m_vertices.size() * sizeof(vertex));
-			unbind();
-
-			GLCALL(glBindVertexArray(previous));
-		}
-		else {
+			bindPrevious();
+		} else {
 			m_buffer.buffer(&m_vertices[0], m_vertices.size() * sizeof(vertex));
 		}
 	}
@@ -54,16 +64,11 @@ void VertexArray::bufferVertices()
 
 void VertexArray::pushFormat(GLenum type, int count)
 {	
-	GLint previousArray;
-	GLint previousBuffer;
-
 	if (!isBound()) {
-		GLCALL(glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &previousArray));
 		bind();
 	}
 
 	if (!m_buffer.isBound()) {
-		GLCALL(glGetIntegerv(GL_VERTEX_ARRAY_BUFFER_BINDING, &previousBuffer));
 		m_buffer.bind();
 	}
 
@@ -79,13 +84,12 @@ void VertexArray::pushFormat(GLenum type, int count)
 		m_nextFormatIndex++;
 	}
 
-	if (previousBuffer) {
-		m_buffer.unbind();
-		GLCALL(glBindBuffer(GL_ARRAY_BUFFER, previousBuffer));
+	if (m_manager->getPreviousVertexBuffer() != m_buffer.getOpenglName())
+	{
+		m_buffer.bindPrevious();
 	}
 
-	if (previousArray) {
-		unbind();
-		GLCALL(glBindVertexArray(previousArray));
+	if (m_manager->getPreviousVertexArray() != m_openglName) {
+		bindPrevious();
 	}
 }

@@ -2,11 +2,13 @@
 
 #include "glcommon.h"
 
+//Clear all OpenGL errors in queue
 void glClearErrors()
 {
 	while (glGetError() != GL_NO_ERROR);
 }
 
+//Gets and prints all OpenGL errors.  Returns true if none are in queue.
 bool glCheckErrors(const char* file, long line, const char* function)
 {
 	bool success = true;;

@@ -2,9 +2,12 @@
 
 #include "glcommon.h"
 
+#include "glmanager.h"
+
+//Wrapper for the OpenGL array buffer
 class VertexBuffer {
 public:
-	VertexBuffer();
+	VertexBuffer(GLManager* manager);
 	~VertexBuffer();
 
 	void bind();
@@ -12,10 +15,20 @@ public:
 
 	void buffer(void* data, GLuint size);
 
+	friend class VertexArray;
+
 private:
+	VertexBuffer();
+
+	void bindPrevious();
+
 	GLuint m_openglName;
+
+	GLManager* m_manager;
+
 	bool m_bound;
 
 public:
-	inline bool isBound() const { return m_bound; }
+	inline GLint getOpenglName()	const	{ return m_openglName; }
+	inline bool isBound()			const	{ return m_bound; }
 };

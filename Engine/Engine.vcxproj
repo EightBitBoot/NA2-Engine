@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\swi\graphics\glerror.cpp" />
+    <ClCompile Include="src\swi\graphics\glmanager.cpp" />
     <ClCompile Include="src\swi\graphics\vertexarray.cpp" />
     <ClCompile Include="src\swi\graphics\vertexbuffer.cpp" />
     <ClCompile Include="src\swi\main.cpp" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\swi\graphics\glcommon.h" />
+    <ClInclude Include="src\swi\graphics\glmanager.h" />
     <ClInclude Include="src\swi\graphics\vertexarray.h" />
     <ClInclude Include="src\swi\graphics\vertexbuffer.h" />
     <ClInclude Include="src\swi\math\mat4.h" />
