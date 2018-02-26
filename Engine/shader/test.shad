@@ -15,7 +15,9 @@ void main()
 
 out vec4 outcolor;
 
+uniform float colorVariation;
+
 void main()
 {
-	outcolor = vec4(1.0f, 0.0f, 1.0f, 1.0f);
+	outcolor = vec4(colorVariation * 0.5, 0.3f, colorVariation, 1.0f);
 }

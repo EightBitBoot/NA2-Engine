@@ -23,6 +23,7 @@ public:
 
 	GLint getUniformLocation(const std::string& name);
 	void setUniformMat4f(const std::string& name, const mat4& data);
+	void setUniform1f(const std::string& name, float data);
 
 private:
 	typedef struct ShaderSources { std::string vertexSource; std::string fragmentSource; } ShaderSources;

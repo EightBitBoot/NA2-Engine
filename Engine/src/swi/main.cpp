@@ -86,6 +86,7 @@ int main()
 
 	//Angle to rotate the rectangle
 	float angle = 0.0f;
+	float colorAngle = 0.0f;
 
 	//MAIN LOOP
 	while (!stopped) {
@@ -104,6 +105,13 @@ int main()
 			angle += ANGLE_VELOCITY;
 		}
 
+		colorAngle += ANGLE_VELOCITY;
+		float colorVariation = abs(sin(colorAngle));
+
+		if (colorVariation == 0.1) {
+			colorVariation = 0.1;
+		}
+
 		//Compute the rotation and store in the rotation matrix
 		float negAngleCos = cos(-1.0f * angle);
 		float negAngleSin = sin(-1.0f * angle);
@@ -118,6 +126,7 @@ int main()
 
 		shader.use();
 		shader.setUniformMat4f("rotMat", matrix);
+		shader.setUniform1f("colorVariation", colorVariation);
 
 		GLCALL(glDrawArrays(GL_TRIANGLES, 0, 6));
 

@@ -84,7 +84,7 @@ GLint Shader::getUniformLocation(const std::string& name)
 		m_uniformLocationCache[name] = location;
 	}
 	else {
-		location = m_uniformLocationCache[name] = 0;
+		location = m_uniformLocationCache[name];
 	}
 	return location;
 }
@@ -100,6 +100,21 @@ void Shader::setUniformMat4f(const std::string& name, const mat4& data)
 		}
 		else {
 			GLCALL(glUniformMatrix4fv(location, 1, GL_TRUE, &data[0][0]));
+		}
+	}
+}
+
+void Shader::setUniform1f(const std::string& name, float data)
+{
+	GLint location = getUniformLocation(name);
+	if (location != -1) {
+		if (!m_inUse) {
+			use();
+			GLCALL(glUniform1f(location, data));
+			usePrevious();
+		}
+		else {
+			GLCALL(glUniform1f(location, data));
 		}
 	}
 }
