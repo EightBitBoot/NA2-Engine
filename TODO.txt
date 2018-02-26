@@ -1,0 +1,9 @@
+--Short Term
+Better shader file parser
+Refactor into library
+Index Buffers
+Renderer class
+Lighting Support
+
+--Long Term
+Remove GLFW / Move to native Windows api
