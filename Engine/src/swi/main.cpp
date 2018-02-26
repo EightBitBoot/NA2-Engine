@@ -6,10 +6,11 @@
 
 #include "graphics\vertexarray.h"
 #include "graphics\glmanager.h"
-
+#include "graphics\shader.h"
 
 #include "math\mat4.h"
-#include "shader.h"
+
+#define ANGLE_VELOCITY 0.1f
 
 void terminal_error(const char* message);
 void glfwWindowResizeCallback(GLFWwindow* window, int width, int height);
@@ -29,6 +30,7 @@ int main()
 
 	//Create OpenGL context
 	glfwMakeContextCurrent(window);
+	glfwSwapInterval(1);
 
 	//Initialize GLEW
 	if (glewInit() != GLEW_OK) {
@@ -70,62 +72,11 @@ int main()
 	//Define the position attribute
 	vertexArray.pushFormat(GL_FLOAT, 2);
 
-	//Generate shaders
-	GLCALL(GLint vertexShaderID = glCreateShader(GL_VERTEX_SHADER));
-	GLCALL(GLint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER));
-
-	//Send shader sources to OpenGL (strings are defined in shader.h)
-	GLCALL(glShaderSource(vertexShaderID, 1, &vertexShader, NULL));
-	GLCALL(glShaderSource(fragmentShaderID, 1, &fragmentShader, NULL));
-
-	//Compile vertex shader and print compilation messages
-	GLint success = 0;
-	GLCALL(glCompileShader(vertexShaderID));
-	GLCALL(glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &success));
-	if (success == GL_FALSE) {
-		GLint logLength = 0;
-		GLCALL(glGetShaderiv(vertexShaderID, GL_INFO_LOG_LENGTH, &logLength));
-		char errorMessage[1024];
-		GLCALL(glGetShaderInfoLog(vertexShaderID, 1024, &logLength, errorMessage));
-		printf("Vertex: "); terminal_error(errorMessage);
-	}
-
-	//Compile fragment shader and print compilation messages
-	success = 0;
-	GLCALL(glCompileShader(fragmentShaderID));
-	GLCALL(glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &success));
-	if (success == GL_FALSE) {
-		GLint logLength = 0;
-		GLCALL(glGetShaderiv(fragmentShaderID, GL_INFO_LOG_LENGTH, &logLength));
-		char errorMessage[1024];
-		GLCALL(glGetShaderInfoLog(fragmentShaderID, 1024, &logLength, errorMessage));
-		printf("Fragment: ");  terminal_error(errorMessage);
-	}
-
-	//Generate shader program
-	GLuint shaderProgramID = glCreateProgram();
+	Shader shader(&manager, "shader/test.shad");
+	shader.compile();
+	shader.link();
 	
-	//Attach compiled shaders
-	GLCALL(glAttachShader(shaderProgramID, vertexShaderID));
-	GLCALL(glAttachShader(shaderProgramID, fragmentShaderID));
-
-	GLCALL(glLinkProgram(shaderProgramID));
-	
-	//Clean up extra shaders
-	GLCALL(glDetachShader(shaderProgramID, vertexShaderID));
-	GLCALL(glDetachShader(shaderProgramID, fragmentShaderID));
-
-	GLCALL(glDeleteShader(vertexShaderID));
-	GLCALL(glDeleteShader(fragmentShaderID));
-
-	//Get the uniform location of the rotation matrix in the shader programs
-	GLCALL(GLint rotationMatLocation = glGetUniformLocation(shaderProgramID, "rotMat"));
-
-	if (rotationMatLocation == -1) {
-		terminal_error("Couldn't find uniform");
-	}
-
-	//Initialize an identity matrix for rotations
+	//Rotation matrix
 	mat4 matrix;
 
 	matrix[0][0] = 1;
@@ -145,12 +96,12 @@ int main()
 		//Adjust the angle if the left or right key is being pressed
 		int leftState = glfwGetKey(window, GLFW_KEY_LEFT);
 		if (leftState == GLFW_PRESS) {
-			angle -= 0.01f;
+			angle -= ANGLE_VELOCITY;
 		}
 
 		int rightState = glfwGetKey(window, GLFW_KEY_RIGHT);
 		if (rightState == GLFW_PRESS) {
-			angle += 0.01f;
+			angle += ANGLE_VELOCITY;
 		}
 
 		//Compute the rotation and store in the rotation matrix
@@ -164,10 +115,12 @@ int main()
 		
 		//Draw the rectangle
 		vertexArray.bind();
-		GLCALL(glUseProgram(shaderProgramID));
-		GLCALL(glUniformMatrix4fv(rotationMatLocation, 1, GL_FALSE, &matrix[0][0]));
+
+		shader.use();
+		shader.setUniformMat4f("rotMat", matrix);
+
 		GLCALL(glDrawArrays(GL_TRIANGLES, 0, 6));
-		GLCALL(glUseProgram(0));
+
 		vertexArray.unbind();
 
 		//Present the final product
@@ -180,7 +133,7 @@ int main()
 	}
 
 	//Cleanup shader program
-	GLCALL(glDeleteProgram(shaderProgramID));
+	//GLCALL(glDeleteProgram(shaderProgramID));
 
 	//Close the window
 	glfwDestroyWindow(window);

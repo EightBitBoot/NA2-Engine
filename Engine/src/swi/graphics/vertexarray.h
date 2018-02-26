@@ -33,7 +33,7 @@ private:
 
 	std::vector<vertex> m_vertices;
 
-	GLuint m_openglName;
+	GLuint m_handle;
 	
 	VertexBuffer m_buffer;
 	GLManager* m_manager;
@@ -44,6 +44,6 @@ private:
 	bool m_bound;
 
 public:
-	inline GLint getOpenglName()	const	{ return m_openglName; }
+	inline GLint getOpenglName()	const	{ return m_handle; }
 	inline bool isBound()			const	{ return m_bound; }
 };

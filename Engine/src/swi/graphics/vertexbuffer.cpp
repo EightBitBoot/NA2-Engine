@@ -1,8 +1,8 @@
 #include "vertexbuffer.h"
 
-VertexBuffer::VertexBuffer(GLManager* manager) : m_openglName(0), m_manager(manager), m_bound(false)
+VertexBuffer::VertexBuffer(GLManager* manager) : m_handle(0), m_manager(manager), m_bound(false)
 {
-	GLCALL(glGenBuffers(1, &m_openglName));
+	GLCALL(glGenBuffers(1, &m_handle));
 }
 
 VertexBuffer::~VertexBuffer()
@@ -11,7 +11,7 @@ VertexBuffer::~VertexBuffer()
 
 void VertexBuffer::bind()
 {
-	m_manager->bindVertexBuffer(m_openglName);
+	m_manager->bindVertexBuffer(m_handle);
 	m_bound = true;
 }
 

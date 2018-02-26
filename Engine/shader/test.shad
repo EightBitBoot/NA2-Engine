@@ -1,6 +1,4 @@
-#pragma once
-
-const char* vertexShader = R"(
+#shader vertex
 #version 330 core
 
 layout(location = 0) in vec2 pos;
@@ -11,9 +9,8 @@ void main()
 {
 	gl_Position = rotMat * vec4(pos, 0.0f, 1.0f);
 }
-)";
 
-const char* fragmentShader = R"(
+#shader fragment
 #version 330 core
 
 out vec4 outcolor;
@@ -22,4 +19,3 @@ void main()
 {
 	outcolor = vec4(1.0f, 0.0f, 1.0f, 1.0f);
 }
-)";

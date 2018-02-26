@@ -86,7 +86,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glew32sd.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -106,7 +106,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="src\swi\graphics\glerror.cpp" />
     <ClCompile Include="src\swi\graphics\glmanager.cpp" />
+    <ClCompile Include="src\swi\graphics\shader.cpp" />
     <ClCompile Include="src\swi\graphics\vertexarray.cpp" />
     <ClCompile Include="src\swi\graphics\vertexbuffer.cpp" />
     <ClCompile Include="src\swi\main.cpp" />
@@ -144,11 +145,11 @@
   <ItemGroup>
     <ClInclude Include="src\swi\graphics\glcommon.h" />
     <ClInclude Include="src\swi\graphics\glmanager.h" />
+    <ClInclude Include="src\swi\graphics\shader.h" />
     <ClInclude Include="src\swi\graphics\vertexarray.h" />
     <ClInclude Include="src\swi\graphics\vertexbuffer.h" />
     <ClInclude Include="src\swi\math\mat4.h" />
     <ClInclude Include="src\swi\math\vec4.h" />
-    <ClInclude Include="src\swi\shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

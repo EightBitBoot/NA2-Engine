@@ -1,8 +1,8 @@
 #include "vertexarray.h"
 
-VertexArray::VertexArray(GLManager* manager) : m_openglName(0), m_buffer(manager), m_manager(manager), m_bound(false), m_nextFormatIndex(0), m_nextFormatStride(0), m_nextFormatPointer(0)
+VertexArray::VertexArray(GLManager* manager) : m_handle(0), m_buffer(manager), m_manager(manager), m_bound(false), m_nextFormatIndex(0), m_nextFormatStride(0), m_nextFormatPointer(0)
 {
-	GLCALL(glGenVertexArrays(1, &m_openglName));
+	GLCALL(glGenVertexArrays(1, &m_handle));
 }
 
 VertexArray::~VertexArray()
@@ -11,7 +11,7 @@ VertexArray::~VertexArray()
 
 void VertexArray::bind()
 {
-	m_manager->bindVertexArray(m_openglName);
+	m_manager->bindVertexArray(m_handle);
 	m_bound = true;
 }
 
@@ -89,7 +89,7 @@ void VertexArray::pushFormat(GLenum type, int count)
 		m_buffer.bindPrevious();
 	}
 
-	if (m_manager->getPreviousVertexArray() != m_openglName) {
+	if (m_manager->getPreviousVertexArray() != m_handle) {
 		bindPrevious();
 	}
 }

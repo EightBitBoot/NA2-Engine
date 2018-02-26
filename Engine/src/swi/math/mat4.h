@@ -13,6 +13,7 @@ public:
 	};
 
 	vec4& operator[](int index);
+	const vec4& operator[](int index) const;
 
 	friend std::ostream& operator<<(std::ostream& stream, mat4& matrix);
 

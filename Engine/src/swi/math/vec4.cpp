@@ -15,6 +15,11 @@ float& vec4::operator[](int index)
 	return elements[index];
 }
 
+const float& vec4::operator[](int index) const
+{
+	return elements[index];
+}
+
 std::ostream& operator<<(std::ostream& stream, vec4& vector)
 {
 	stream << "[ " << vector[0] << ", " << vector[1] << ", " << vector[2] << ", " << vector[3] << " ]";
