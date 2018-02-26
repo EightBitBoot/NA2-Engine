@@ -4,8 +4,16 @@ Refactor into library
 Index Buffers
 Renderer class
 Lighting Support
+Logging system
+Error system
 
 --Long Term
 Remove GLFW / Move to native Windows api
 Virtual File System
 Refactor into public api and private library code
+Unicode support
+String rendering
+Basic shape api
+Batch renderer
+Event system
+Default Shaders
