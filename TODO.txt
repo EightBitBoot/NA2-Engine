@@ -7,3 +7,5 @@ Lighting Support
 
 --Long Term
 Remove GLFW / Move to native Windows api
+Virtual File System
+Refactor into public api and private library code
