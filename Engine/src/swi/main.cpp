@@ -13,7 +13,7 @@
 #define ANGLE_VELOCITY 0.1f
 
 void terminal_error(const char* message);
-void glfwWindowResizeCallback(GLFWwindow* window, int width, int height);
+void glfw_window_resize_callback(GLFWwindow* window, int width, int height);
 
 int main()
 {	
@@ -46,7 +46,7 @@ int main()
 	//Set the window background color to black
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	glfwSetWindowSizeCallback(window, &glfwWindowResizeCallback);
+	glfwSetWindowSizeCallback(window, &glfw_window_resize_callback);
 
 	//Mark the engine as running after environment initialization
 	bool stopped = false;
@@ -61,10 +61,10 @@ int main()
 	};
 	
 	//Initialize an OpenGL manager
-	GLManager manager;
+	nat::GLManager manager;
 
 	//Create a VertexArray for the rectangle
-	VertexArray vertexArray(&manager);
+	nat::VertexArray vertexArray(&manager);
 	vertexArray.addVertices(vertices, 6);
 
 	vertexArray.bufferVertices();
@@ -72,12 +72,12 @@ int main()
 	//Define the position attribute
 	vertexArray.pushFormat(GL_FLOAT, 2);
 
-	Shader shader(&manager, "shader/test.shad");
+	nat::Shader shader(&manager, "shader/test.shad");
 	shader.compile();
 	shader.link();
 	
 	//Rotation matrix
-	mat4 matrix;
+	nat::Mat4 matrix;
 
 	matrix[0][0] = 1;
 	matrix[1][1] = 1;
@@ -108,8 +108,8 @@ int main()
 		colorAngle += ANGLE_VELOCITY;
 		float colorVariation = abs(sin(colorAngle));
 
-		if (colorVariation == 0.1) {
-			colorVariation = 0.1;
+		if (colorVariation == 0.1f) {
+			colorVariation = 0.1f;
 		}
 
 		//Compute the rotation and store in the rotation matrix
@@ -165,7 +165,7 @@ void terminal_error(const char* message)
 }
 
 //GLFW window callback that resizes the OpenGL Viewport to the new window dimensions
-void glfwWindowResizeCallback(GLFWwindow* window, int width, int height)
+void glfw_window_resize_callback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 }

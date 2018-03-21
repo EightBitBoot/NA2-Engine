@@ -1,24 +1,106 @@
 #include "mat4.h"
 
-mat4::mat4()
-{
-	memset(elements, 0, 4 * 4 * sizeof(float));
-}
+namespace nat {
+	Mat4::Mat4()
+	{
+		memset(elements, 0, 4 * 4 * sizeof(float));
+	}
 
-mat4::~mat4() {}
+	Mat4::Mat4(float identity)
+	{
+		memset(elements, 0, 4 * 4 * sizeof(float));
+		elements[0 * 4 + 0] = identity;
+		elements[1 * 4 + 1] = identity;
+		elements[2 * 4 + 2] = identity;
+		elements[3 * 4 + 3] = identity;
+	}
 
-vec4& mat4::operator[](int index)
-{
-	return rows[index];
-}
+	Mat4::~Mat4() {}
 
-const vec4& mat4::operator[](int index) const
-{
-	return rows[index];
-}
+	void Mat4::add(const Mat4& other)
+	{
+		for (int i = 0; i < 4 * 4; i++) {
+			elements[i] += other.elements[i];
+		}
+	}
 
-std::ostream& operator<<(std::ostream& stream, mat4& matrix)
-{
-	stream << matrix[0] << std::endl << matrix[1] << std::endl << matrix[2] << std::endl << matrix[3];
-	return stream;
+	void Mat4::subtract(const Mat4& other)
+	{
+		for (int i = 0; i < 4 * 4; i++) {
+			elements[i] -= other.elements[i];
+		}
+	}
+
+	void Mat4::multiply(const Mat4& other)
+	{
+		float result[16];
+
+		for (int row = 0; row < 4; row++) {
+			for (int col = 0; col < 4; col++) {
+				//Dot-product for each element of result
+				float resultSum = 0;
+				for (int i = 0; i < 4; i++) {
+					resultSum += elements[row * 4 + i] * other.elements[i * 4 + col];
+				}
+				result[row * 4 + col] = resultSum;
+			}
+		}
+
+		memcpy(elements, result, 4 * 4 * sizeof(float));
+	}
+
+	const Vec4& Mat4::operator[](int index) const
+	{
+		if (index < 4 && index >= 0) {
+			return rows[index];
+		}
+		ERROR("ACCESS VIOLATION");
+	}
+
+	Vec4& Mat4::operator[](int index)
+	{
+		if (index < 4 && index >= 0) {
+			return rows[index];
+		}
+		ERROR("ACCESS VIOLATION");
+	}
+
+	void Mat4::operator+=(const Mat4& other)
+	{
+		add(other);
+	}
+
+	void Mat4::operator-=(const Mat4& other)
+	{
+		subtract(other);
+	}
+
+	void Mat4::operator*=(const Mat4& other)
+	{
+		multiply(other);
+	}
+
+	std::ostream& operator<<(std::ostream& stream, Mat4& matrix)
+	{
+		stream << matrix[0] << std::endl << matrix[1] << std::endl << matrix[2] << std::endl << matrix[3];
+		return stream;
+	}
+
+	Mat4 operator+(Mat4 left, const Mat4& right)
+	{
+		left.add(right);
+		return left;
+	}
+
+	Mat4 operator-(Mat4 left, const Mat4& right)
+	{
+		left.subtract(right);
+		return left;
+	}
+
+	Mat4 operator*(Mat4 left, const Mat4& right)
+	{
+		left.multiply(right);
+		return left;
+	}
 }

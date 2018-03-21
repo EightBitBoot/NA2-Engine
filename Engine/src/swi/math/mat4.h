@@ -4,19 +4,35 @@
 
 #include "vec4.h"
 
-//4 * 4 float matrix
-class mat4 {
-public:
-	union {
-		float elements[4 * 4];
-		vec4 rows[4];
+namespace nat {
+	//4 * 4 float matrix
+	class Mat4 {
+	public:
+		union {
+			float elements[4 * 4];
+			Vec4 rows[4];
+		};
+
+		Mat4();
+		Mat4(float identity);
+		~Mat4();
+
+		void add(const Mat4& other);
+		void subtract(const Mat4& other);
+		void multiply(const Mat4& other);
+
+		const Vec4& operator[](int index) const;
+		Vec4& operator[](int index);
+
+
+		void operator+=(const Mat4& other);
+		void operator-=(const Mat4& other);
+		void operator*=(const Mat4& other);
+
+		friend std::ostream& operator<<(std::ostream& stream, Mat4& matrix);
+
+		friend Mat4 operator+(Mat4 left, const Mat4& right);
+		friend Mat4 operator-(Mat4 left, const Mat4& right);
+		friend Mat4 operator*(Mat4 left, const Mat4& right);
 	};
-
-	vec4& operator[](int index);
-	const vec4& operator[](int index) const;
-
-	friend std::ostream& operator<<(std::ostream& stream, mat4& matrix);
-
-	mat4();
-	~mat4();
-};
+}

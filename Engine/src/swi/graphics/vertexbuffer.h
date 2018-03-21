@@ -4,31 +4,33 @@
 
 #include "glmanager.h"
 
-//Wrapper for the OpenGL array buffer
-class VertexBuffer {
-public:
-	VertexBuffer(GLManager* manager);
-	~VertexBuffer();
+namespace nat {
+	//Wrapper for the OpenGL array buffer
+	class VertexBuffer {
+	public:
+		VertexBuffer(GLManager* manager);
+		~VertexBuffer();
 
-	void bind();
-	void unbind();
+		void bind();
+		void unbind();
 
-	void buffer(void* data, GLuint size);
+		void buffer(void* data, GLuint size);
 
-	friend class VertexArray;
+		friend class VertexArray;
 
-private:
-	VertexBuffer();
+	private:
+		VertexBuffer();
 
-	void bindPrevious();
+		void bindPrevious();
 
-	GLuint m_handle;
+		GLuint m_handle;
 
-	GLManager* m_manager;
+		GLManager* m_manager;
 
-	bool m_bound;
+		bool m_bound;
 
-public:
-	inline GLint getOpenglName()	const	{ return m_handle; }
-	inline bool isBound()			const	{ return m_bound; }
-};
+	public:
+		inline GLint getOpenglName()	const { return m_handle; }
+		inline bool isBound()			const { return m_bound; }
+	};
+}
