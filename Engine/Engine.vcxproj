@@ -72,13 +72,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\GLM\include;$(SolutionDir)dependencies\GLEW\include;$(SolutionDir)dependencies\GLFW\include;$(ProjectDir)src\swi;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\GLEW\include;$(SolutionDir)dependencies\GLFW\include;$(ProjectDir)src\nat;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\GLEW\lib;$(SolutionDir)dependencies\GLFW\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\GLM\include;$(SolutionDir)dependencies\GLEW\include;$(SolutionDir)dependencies\GLFW\include;$(ProjectDir)src\swi;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\GLEW\include;$(SolutionDir)dependencies\GLFW\include;$(ProjectDir)src\nat;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\GLEW\lib;$(SolutionDir)dependencies\GLFW\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -133,23 +133,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\swi\graphics\glerror.cpp" />
-    <ClCompile Include="src\swi\graphics\glmanager.cpp" />
-    <ClCompile Include="src\swi\graphics\shader.cpp" />
-    <ClCompile Include="src\swi\graphics\vertexarray.cpp" />
-    <ClCompile Include="src\swi\graphics\vertexbuffer.cpp" />
-    <ClCompile Include="src\swi\main.cpp" />
-    <ClCompile Include="src\swi\math\mat4.cpp" />
-    <ClCompile Include="src\swi\math\vec4.cpp" />
+    <ClCompile Include="src\nat\graphics\glerror.cpp" />
+    <ClCompile Include="src\nat\graphics\glmanager.cpp" />
+    <ClCompile Include="src\nat\graphics\shader.cpp" />
+    <ClCompile Include="src\nat\graphics\vertexarray.cpp" />
+    <ClCompile Include="src\nat\graphics\vertexbuffer.cpp" />
+    <ClCompile Include="src\nat\main.cpp" />
+    <ClCompile Include="src\nat\math\mat4.cpp" />
+    <ClCompile Include="src\nat\math\vec4.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\swi\graphics\glcommon.h" />
-    <ClInclude Include="src\swi\graphics\glmanager.h" />
-    <ClInclude Include="src\swi\graphics\shader.h" />
-    <ClInclude Include="src\swi\graphics\vertexarray.h" />
-    <ClInclude Include="src\swi\graphics\vertexbuffer.h" />
-    <ClInclude Include="src\swi\math\mat4.h" />
-    <ClInclude Include="src\swi\math\vec4.h" />
+    <ClInclude Include="src\nat\error.h" />
+    <ClInclude Include="src\nat\graphics\glcommon.h" />
+    <ClInclude Include="src\nat\graphics\glmanager.h" />
+    <ClInclude Include="src\nat\graphics\shader.h" />
+    <ClInclude Include="src\nat\graphics\temp.h" />
+    <ClInclude Include="src\nat\graphics\vertexarray.h" />
+    <ClInclude Include="src\nat\graphics\vertexbuffer.h" />
+    <ClInclude Include="src\nat\math\mat4.h" />
+    <ClInclude Include="src\nat\math\vec4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

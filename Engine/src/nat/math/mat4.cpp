@@ -17,6 +17,21 @@ namespace nat {
 
 	Mat4::~Mat4() {}
 
+	Mat4 Mat4::Orthographic(float left, float right, float top, float bottom, float near, float far)
+	{
+		Mat4 result(1.0f);
+		result[0][0] = 2 / (right - left);
+		result[0][3] = -1 * ((right + left) / (right - left));
+
+		result[1][1] = 2 / (top - bottom);
+		result[1][3] = -1 * ((top + bottom) / (top - bottom));
+
+		result[2][2] = -2 / (far - near);
+		result[2][3] = -1 * ((far + near) / (far - near));
+
+		return result;
+	}
+
 	void Mat4::add(const Mat4& other)
 	{
 		for (int i = 0; i < 4 * 4; i++) {

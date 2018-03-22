@@ -17,6 +17,8 @@ namespace nat {
 		Mat4(float identity);
 		~Mat4();
 
+		static Mat4 Orthographic(float left, float right, float top, float bottom, float near, float far);
+
 		void add(const Mat4& other);
 		void subtract(const Mat4& other);
 		void multiply(const Mat4& other);

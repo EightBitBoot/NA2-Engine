@@ -1,7 +1,7 @@
 #include "vertexarray.h"
 
 namespace nat {
-	VertexArray::VertexArray(GLManager* manager) : m_handle(0), m_buffer(manager), m_manager(manager), m_bound(false), m_nextFormatIndex(0), m_nextFormatStride(0), m_nextFormatPointer(0)
+	VertexArray::VertexArray(GLManager* manager) : m_handle(0), m_buffer(manager), m_manager(manager), m_bound(false), m_nextFormatIndex(0), m_nextFormatPointer(0)
 	{
 		GLCALL(glGenVertexArrays(1, &m_handle));
 	}
@@ -77,11 +77,10 @@ namespace nat {
 		switch (type) {
 		case GL_FLOAT:
 		default:
-			GLCALL(glVertexAttribPointer(m_nextFormatIndex, count, type, false, m_nextFormatStride, (void*)m_nextFormatPointer));
+			GLCALL(glVertexAttribPointer(m_nextFormatIndex, count, type, false, sizeof(vertex), (void*)m_nextFormatPointer));
 
 			GLCALL(glEnableVertexAttribArray(m_nextFormatIndex));
 
-			m_nextFormatStride += count * sizeof(float);
 			m_nextFormatPointer += count * sizeof(float);
 			m_nextFormatIndex++;
 		}

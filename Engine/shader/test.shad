@@ -1,23 +1,27 @@
 #shader vertex
 #version 330 core
 
-layout(location = 0) in vec2 pos;
+layout(location = 0) in vec3 pos;
+layout(location = 1) in vec3 vertColor;
 
-uniform mat4 rotMat;
+out vec3 fragColor;
+
+uniform mat4 trsMat;
 
 void main()
 {
-	gl_Position = rotMat * vec4(pos, 0.0f, 1.0f);
+	fragColor = vertColor;
+	gl_Position = trsMat * vec4(pos, 1.0f);
 }
 
 #shader fragment
 #version 330 core
 
-out vec4 outcolor;
+in vec3 fragColor;
 
-uniform float colorVariation;
+out vec4 outcolor;
 
 void main()
 {
-	outcolor = vec4(colorVariation * 0.5, 0.3f, colorVariation, 1.0f);
+	outcolor = vec4(fragColor, 1.0f);
 }

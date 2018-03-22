@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-#include "graphics\glcommon.h"
+ #include "graphics\glcommon.h"
 
 #include "graphics\vertexarray.h"
 #include "graphics\glmanager.h"
@@ -39,9 +39,8 @@ int main()
 
 	//Print environment information
 	printf("OPENGL version: %s\n", glGetString(GL_VERSION));
-	printf("GLFW version: %s\n", glfwGetVersionString());
-	printf("GLEW version: %s\n", glewGetString(GLEW_VERSION));
-
+	printf("GLFW version: %s\n",   glfwGetVersionString());
+	printf("GLEW version: %s\n",   glewGetString(GLEW_VERSION));
 
 	//Set the window background color to black
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -51,42 +50,94 @@ int main()
 	//Mark the engine as running after environment initialization
 	bool stopped = false;
 
-	vertex vertices[] = {
-		{ -0.5f,  0.5f },
-		{ -0.5f, -0.5f },
-		{  0.5f,  0.5f },
-		{  0.5f,  0.5f },
-		{  0.5f, -0.5f },
-		{ -0.5f, -0.5f }
+	//nat::vertex vertices[] = {
+	//	{ -0.5f,  0.5f },
+	//	{ -0.5f, -0.5f },
+	//	{  0.5f,  0.5f },
+	//	{  0.5f,  0.5f },
+	//	{  0.5f, -0.5f },
+	//	{ -0.5f, -0.5f }
+	//};
+
+	nat::vertex vertices[] = {
+		//Back Face
+		{-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f},
+		{ 0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f},
+		{ 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f},
+		{ 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f},
+		{-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 1.0f},
+		{-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 1.0f},
+
+		//Front Face				
+		{-0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f},
+		{ 0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f},
+		{ 0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f},
+		{ 0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f},
+		{-0.5f, -0.5f,  0.5f, 0.0f, 1.0f, 0.0f},
+		{-0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f},
+
+		//Left Face					
+		{-0.5f,  0.5f,  0.5f, 0.5f, 0.0f, 0.5f},
+		{-0.5f, -0.5f, -0.5f, 0.5f, 0.0f, 0.5f},
+		{-0.5f,  0.5f, -0.5f, 0.5f, 0.0f, 0.5f},
+		{-0.5f, -0.5f, -0.5f, 0.5f, 0.0f, 0.5f},
+		{-0.5f,  0.5f,  0.5f, 0.5f, 0.0f, 0.5f},
+		{-0.5f, -0.5f,  0.5f, 0.5f, 0.0f, 0.5f},
+
+		//Right Face
+		{ 0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f},
+		{ 0.5f,  0.5f, -0.5f, 1.0f, 0.0f, 0.0f},
+		{ 0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f},
+		{ 0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f},
+		{ 0.5f, -0.5f,  0.5f, 1.0f, 0.0f, 0.0f},
+		{ 0.5f,  0.5f,  0.5f, 1.0f, 0.0f, 0.0f},
+		
+		//Bottom Face			
+		{-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.0f},
+		{ 0.5f, -0.5f,  0.5f, 0.5f, 0.5f, 0.0f},
+		{ 0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.0f},
+		{ 0.5f, -0.5f,  0.5f, 0.5f, 0.5f, 0.0f},
+		{-0.5f, -0.5f, -0.5f, 0.5f, 0.5f, 0.0f},
+		{-0.5f, -0.5f,  0.5f, 0.5f, 0.5f, 0.0f},
+		
+		//Top Face
+		{-0.5f,  0.5f, -0.5f, 0.0f, 0.5f, 0.5f},
+		{ 0.5f,  0.5f, -0.5f, 0.0f, 0.5f, 0.5f},
+		{ 0.5f,  0.5f,  0.5f, 0.0f, 0.5f, 0.5f},
+		{ 0.5f,  0.5f,  0.5f, 0.0f, 0.5f, 0.5f},
+		{-0.5f,  0.5f,  0.5f, 0.0f, 0.5f, 0.5f},
+		{-0.5f,  0.5f, -0.5f, 0.0f, 0.5f, 0.5f}
 	};
-	
+
 	//Initialize an OpenGL manager
 	nat::GLManager manager;
 
+	GLCALL(glEnable(GL_CULL_FACE));
+
 	//Create a VertexArray for the rectangle
 	nat::VertexArray vertexArray(&manager);
-	vertexArray.addVertices(vertices, 6);
+	vertexArray.addVertices(vertices, 36);
 
 	vertexArray.bufferVertices();
 	
 	//Define the position attribute
-	vertexArray.pushFormat(GL_FLOAT, 2);
+	vertexArray.pushFormat(GL_FLOAT, 3);
+	vertexArray.pushFormat(GL_FLOAT, 3);
 
 	nat::Shader shader(&manager, "shader/test.shad");
 	shader.compile();
 	shader.link();
 	
 	//Rotation matrix
-	nat::Mat4 matrix;
-
-	matrix[0][0] = 1;
-	matrix[1][1] = 1;
-	matrix[2][2] = 1;
-	matrix[3][3] = 1;
+	nat::Mat4 proMat = nat::Mat4::Orthographic(-3.0f, 3.0f, -2.0f, 2.0f, -1.0f, 1.0f);
+	nat::Mat4 rotMaty(1.0f);
+	nat::Mat4 rotMatx(1.0f);
 
 	//Angle to rotate the rectangle
-	float angle = 0.0f;
-	float colorAngle = 0.0f;
+	float angleY = 0.0f;
+	float angleX = 0.0f;
+
+	nat::Mat4 trsMat;
 
 	//MAIN LOOP
 	while (!stopped) {
@@ -97,38 +148,50 @@ int main()
 		//Adjust the angle if the left or right key is being pressed
 		int leftState = glfwGetKey(window, GLFW_KEY_LEFT);
 		if (leftState == GLFW_PRESS) {
-			angle -= ANGLE_VELOCITY;
+			angleY += ANGLE_VELOCITY;
 		}
 
 		int rightState = glfwGetKey(window, GLFW_KEY_RIGHT);
 		if (rightState == GLFW_PRESS) {
-			angle += ANGLE_VELOCITY;
+			angleY -= ANGLE_VELOCITY;
 		}
 
-		colorAngle += ANGLE_VELOCITY;
-		float colorVariation = abs(sin(colorAngle));
+		int upState = glfwGetKey(window, GLFW_KEY_UP);
+		if (upState == GLFW_PRESS) {
+			angleX -= ANGLE_VELOCITY;
+		}
 
-		if (colorVariation == 0.1f) {
-			colorVariation = 0.1f;
+		int downState = glfwGetKey(window, GLFW_KEY_DOWN);
+		if (downState == GLFW_PRESS) {
+			angleX += ANGLE_VELOCITY;
 		}
 
 		//Compute the rotation and store in the rotation matrix
-		float negAngleCos = cos(-1.0f * angle);
-		float negAngleSin = sin(-1.0f * angle);
+		float negAngleCosy = cos(-1.0f * angleY);
+		float negAngleSiny = sin(-1.0f * angleY);
 
-		matrix[0][0] = negAngleCos;
-		matrix[0][2] = negAngleSin;
-		matrix[2][0] = negAngleSin;
-		matrix[2][2] = negAngleCos;
+		float negAngleCosx = cos(-1.0f * angleX);
+		float negAngleSinx = sin(-1.0f * angleX);
+
+		rotMaty[0][0] =	negAngleCosy;
+		rotMaty[0][2] =	negAngleSiny;
+		rotMaty[2][0] = -negAngleSiny;
+		rotMaty[2][2] =	negAngleCosy;
 		
+		rotMatx[1][1] =	negAngleCosx;
+		rotMatx[1][2] = -negAngleSinx;
+		rotMatx[2][1] =	negAngleSinx;
+		rotMatx[2][2] =	negAngleCosx;
+
+		trsMat = proMat * rotMaty * rotMatx;
+
 		//Draw the rectangle
 		vertexArray.bind();
-
+		
 		shader.use();
-		shader.setUniformMat4f("rotMat", matrix);
-		shader.setUniform1f("colorVariation", colorVariation);
+		shader.setUniformMat4f("trsMat", trsMat);
 
-		GLCALL(glDrawArrays(GL_TRIANGLES, 0, 6));
+		GLCALL(glDrawArrays(GL_TRIANGLES, 0, 36));
 
 		vertexArray.unbind();
 

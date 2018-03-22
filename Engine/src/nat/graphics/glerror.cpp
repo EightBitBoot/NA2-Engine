@@ -3,13 +3,13 @@
 #include "glcommon.h"
 
 //Clear all OpenGL errors in queue
-static void gl_clear_errors()
+void gl_clear_errors()
 {
 	while (glGetError() != GL_NO_ERROR);
 }
 
 //Gets and prints all OpenGL errors.  Returns true if none are in queue.
-static bool gl_check_errors(const char* file, long line, const char* function)
+bool gl_check_errors(const char* file, long line, const char* function)
 {
 	bool success = true;;
 	GLenum error;

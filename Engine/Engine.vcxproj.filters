@@ -27,51 +27,57 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\swi\main.cpp">
+    <ClCompile Include="src\nat\graphics\glerror.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\swi\math\mat4.cpp">
+    <ClCompile Include="src\nat\graphics\glmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\swi\math\vec4.cpp">
+    <ClCompile Include="src\nat\graphics\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\swi\graphics\vertexarray.cpp">
+    <ClCompile Include="src\nat\graphics\vertexarray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\swi\graphics\vertexbuffer.cpp">
+    <ClCompile Include="src\nat\graphics\vertexbuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\swi\graphics\glmanager.cpp">
+    <ClCompile Include="src\nat\math\mat4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\swi\graphics\shader.cpp">
+    <ClCompile Include="src\nat\math\vec4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\swi\graphics\glerror.cpp">
+    <ClCompile Include="src\nat\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\swi\math\mat4.h">
+    <ClInclude Include="src\nat\graphics\glcommon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\swi\math\vec4.h">
+    <ClInclude Include="src\nat\graphics\glmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\swi\graphics\vertexarray.h">
+    <ClInclude Include="src\nat\graphics\shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\swi\graphics\vertexbuffer.h">
+    <ClInclude Include="src\nat\graphics\vertexarray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\swi\graphics\glcommon.h">
+    <ClInclude Include="src\nat\graphics\vertexbuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\swi\graphics\glmanager.h">
+    <ClInclude Include="src\nat\math\mat4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\swi\graphics\shader.h">
+    <ClInclude Include="src\nat\math\vec4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nat\error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nat\graphics\temp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

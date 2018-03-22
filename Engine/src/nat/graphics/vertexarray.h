@@ -40,7 +40,6 @@ namespace nat {
 		GLManager* m_manager;
 
 		unsigned int m_nextFormatIndex;
-		unsigned int m_nextFormatStride;
 		unsigned int m_nextFormatPointer;
 		bool m_bound;
 
